@@ -12,8 +12,6 @@ import android.widget.EditText;
 import com.example.garethlye.vmexercise5.MainActivity;
 import com.example.garethlye.vmexercise5.SecondActivity;
 
-import butterknife.Bind;
-
 /**
  * Created by garethlye on 24/01/2017.
  **/
@@ -23,7 +21,7 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
     private final MainActivity mMainActivity;
     private       EditText     mEditText;
     private       Button       mButton;
-    public String BtnText = "Sendooo";
+    public String BtnText = "Send";
 
 
     public MainActivityViewModelImpl(final MainActivity mainActivity, EditText mainEditText, Button mainButton) {
@@ -61,11 +59,9 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
     }
 
     private void startSecondActivity(){
-        //setBtnText("LOL");
-
-        //String text = mEditText.getText().toString();             <------------how to send mEditText to VM?
+        String text = mEditText.getText().toString();
         Intent i = new Intent(mMainActivity, SecondActivity.class);
-        //i.putExtra("editTextValue", text);
+        i.putExtra("editTextValue", text);
         mMainActivity.startActivity(i);
     }
 
@@ -78,9 +74,7 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
     //@Bindable
     public void setBtnText(String text){
         BtnText = text;
-        notifyPropertyChanged(1); ///////////////////////????
+        //notifyPropertyChanged(1);
     }
-
-
 
 }
