@@ -24,13 +24,13 @@
             android:text=""
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:id="@+id/second_textView"
+            android:id="@+id/card_type"
             />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_below="@id/second_textView"
+            android:layout_below="@id/card_type"
             android:inputType="textNoSuggestions"
             android:ems="15"
             android:hint="Please enter 16 digits"
@@ -61,6 +61,17 @@
             android:layout_marginTop="60dp"
             android:id="@+id/second_button"
             android:enabled="@{viewModel.EnabledStatus}"
+            />
+
+        <Button
+            android:text="Next Activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/second_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:id="@+id/third_button"
+            android:onClick="@{viewModel::nextActivity}"
             />
 
     </RelativeLayout>

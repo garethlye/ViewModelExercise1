@@ -1,5 +1,6 @@
 package ViewModel;
 
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.ObservableBoolean;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.garethlye.vmexercise5.SecondActivity;
+import com.example.garethlye.vmexercise5.ThirdActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,6 +131,23 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
         }
         else
             return false;
+    }
+
+    @Override
+    public void nextActivity(final View view){
+        startThirdActivity();
+    }
+
+    private void startThirdActivity(){
+        String text = mEditText.getText().toString();
+        Intent i = new Intent(mSecondActivity, ThirdActivity.class);
+        i.putExtra("editTextValue", text);
+        mSecondActivity.startActivity(i);
+    }
+
+    private void whatCard(){
+        String input = mEditText.getText().toString();
+
     }
 
 

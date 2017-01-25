@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">VMexercise5</string>
+    <string name="press_me">Press Me!</string>
+    <string name="hello">HELLO IAN! :D</string>
+    <string name="Card_ID_text_1">You\'re entering </string>
+    <string name="Card_ID_text_2">You\'ve entered </string>
+    <string name="VISA">a VISA card</string>
+    <string name="MasterCard">a MasterCard</string>
+    <string name="American_Express">an American Express Card</string>
+    <string name="UnknownCard">an Unknown Card</string>
 </resources>

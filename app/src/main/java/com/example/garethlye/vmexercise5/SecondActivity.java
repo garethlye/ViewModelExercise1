@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class SecondActivity extends AppCompatActivity {
 
-    @Bind(R.id.second_textView)
+    @Bind(R.id.card_type)
     TextView mTextView;
 
     @Bind(R.id.second_warningTextView)
