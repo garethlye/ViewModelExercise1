@@ -58,9 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/second_editText"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="60dp"
             android:id="@+id/second_button"
-            android:enabled="false"
+            android:enabled="@{viewModel.EnabledStatus}"
             />
 
     </RelativeLayout>

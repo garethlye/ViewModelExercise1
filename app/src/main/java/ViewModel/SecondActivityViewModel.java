@@ -1,5 +1,7 @@
 package ViewModel;
 
+import android.databinding.ObservableBoolean;
+
 /**
  * Created by garethlye on 24/01/2017.
  */
@@ -7,5 +9,7 @@ package ViewModel;
 public interface SecondActivityViewModel {
 
     String getWarningText();
+
+    ObservableBoolean getEnabledStatus();
 
 }

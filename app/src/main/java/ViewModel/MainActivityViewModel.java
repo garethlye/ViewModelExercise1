@@ -1,5 +1,6 @@
 package ViewModel;
 
+import android.databinding.ObservableBoolean;
 import android.view.View;
 
 /**
@@ -10,7 +11,7 @@ public interface MainActivityViewModel {
 
     void onButtonClicked(View view);
 
-    void setBtnText(String text);
-
     String getBtnText();
+
+    ObservableBoolean getEnabledStatus();
 }

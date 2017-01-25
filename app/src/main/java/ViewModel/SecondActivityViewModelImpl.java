@@ -1,6 +1,8 @@
 package ViewModel;
 
 import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.databinding.ObservableBoolean;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -25,7 +27,8 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
     private       TextView       mTextView;
     private       TextView       mWarningTextView;
 
-    public String warningText = "You have inputted a wrong format!\nPlease key in and try again!";
+    public final ObservableBoolean EnabledStatus = new ObservableBoolean(false);
+    public       String            warningText   = "You have inputted a wrong format!\nPlease key in and try again!";
 
 
     public SecondActivityViewModelImpl(final SecondActivity secondActivity, EditText editText, Button button, TextView textView, TextView warningTextView) {
@@ -34,6 +37,7 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
         mButton = button;
         mTextView = textView;
         mWarningTextView = warningTextView;
+        EnabledStatus.set(mEditText.length() >0);
         setup();
     }
 
@@ -48,13 +52,18 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
             if(mEditText.length() > 0){
             if ((mEditText.getText().toString().length() != 16)) {
                 mWarningTextView.setVisibility(View.VISIBLE);
-                mButton.setEnabled(false);
+                EnabledStatus.set(false);
             }
             else
-                if (checkNumber())
+                if (checkNumber()){
                     mWarningTextView.setVisibility(View.INVISIBLE);
-                    mButton.setEnabled(true);
+                    EnabledStatus.set(true);
                 }
+            }
+            else {
+                EnabledStatus.set(false);
+                mWarningTextView.setVisibility(View.INVISIBLE);
+            }
         }
 
         @Override
@@ -63,12 +72,17 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
             if(mEditText.length() > 0){
                 if ((mEditText.getText().toString().length() != 16)){
                     mWarningTextView.setVisibility(View.VISIBLE);
-                    mButton.setEnabled(false);
+                    EnabledStatus.set(false);
             }
                 else
-                if (checkNumber())
+                if (checkNumber()) {
                     mWarningTextView.setVisibility(View.INVISIBLE);
-                mButton.setEnabled(true);
+                    EnabledStatus.set(true);
+                }
+            }
+            else {
+                EnabledStatus.set(false);
+                mWarningTextView.setVisibility(View.INVISIBLE);
             }
             /**mButton.setEnabled((mEditText.length() > 0));
 
@@ -84,12 +98,17 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
             if(mEditText.length() > 0){
                 if ((mEditText.getText().toString().length() != 16)){
                     mWarningTextView.setVisibility(View.VISIBLE);
-                mButton.setEnabled(false);
+                    EnabledStatus.set(false);
             }
                 else
-                if (checkNumber())
-                    mWarningTextView.setVisibility(View.INVISIBLE);
-                mButton.setEnabled(true);
+                    if (checkNumber()) {
+                        mWarningTextView.setVisibility(View.INVISIBLE);
+                        EnabledStatus.set(true);
+                    }
+            }
+            else {
+                EnabledStatus.set(false);
+                mWarningTextView.setVisibility(View.INVISIBLE);
             }
 
             /**mButton.setEnabled((mEditText.length() > 0));
@@ -101,7 +120,7 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
         }
     };
 
-    public boolean checkNumber(){
+    private boolean checkNumber(){
         String input = mEditText.getText().toString();
         String regex = "^[0-9]+$";
         Matcher matcher = Pattern.compile(regex).matcher(input);
@@ -136,5 +155,11 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
     public String getWarningText(){
         return warningText;
     }
+
+    @Bindable
+    public ObservableBoolean getEnabledStatus(){
+        return EnabledStatus;
+    }
+
 
 }

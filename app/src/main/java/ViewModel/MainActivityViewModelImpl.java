@@ -3,6 +3,7 @@ package ViewModel;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.ObservableBoolean;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -20,14 +21,13 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
 
     private final MainActivity mMainActivity;
     private       EditText     mEditText;
-    private       Button       mButton;
-    public String BtnText = "Send";
+    public       String            BtnText       = "Send";
+    public final ObservableBoolean EnabledStatus = new ObservableBoolean(false);
 
 
     public MainActivityViewModelImpl(final MainActivity mainActivity, EditText mainEditText, Button mainButton) {
         mMainActivity = mainActivity;
         mEditText = mainEditText;
-        mButton = mainButton;
 
         setup();
     }
@@ -39,17 +39,17 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            mButton.setEnabled((mEditText.length() > 0));
+            EnabledStatus.set(mEditText.length() >0);
         }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            mButton.setEnabled((mEditText.length() > 0));
+            EnabledStatus.set(mEditText.length() >0);
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
-            mButton.setEnabled((mEditText.length() > 0));
+            EnabledStatus.set(mEditText.length() >0);
         }
     };
 
@@ -70,11 +70,9 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
         return BtnText;
     }
 
-
-    //@Bindable
-    public void setBtnText(String text){
-        BtnText = text;
-        //notifyPropertyChanged(1);
+    @Bindable
+    public ObservableBoolean getEnabledStatus(){
+        return EnabledStatus;
     }
 
 }
