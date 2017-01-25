@@ -5,4 +5,7 @@ package ViewModel;
  */
 
 public interface SecondActivityViewModel {
+
+    String getWarningText();
+
 }
