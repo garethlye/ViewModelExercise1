@@ -23,14 +23,10 @@ public class ThirdActivityViewModelImpl extends BaseObservable implements ThirdA
 
     @Override
     public void onToggleClick(View view){
-        if(enabledStatus == "invisible"){
-            enabledStatus = "visible";
-            mTextView.setVisibility(View.VISIBLE);
-        }
-        else if (enabledStatus == "visible") {
-            enabledStatus = "invisible";
+        if(mTextView.getVisibility() == View.VISIBLE)
             mTextView.setVisibility(View.INVISIBLE);
-        }
+        else
+            mTextView.setVisibility(View.VISIBLE);
     }
 
 }
