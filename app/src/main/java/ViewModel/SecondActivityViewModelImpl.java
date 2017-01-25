@@ -86,13 +86,6 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
                 EnabledStatus.set(false);
                 mWarningTextView.setVisibility(View.INVISIBLE);
             }
-            /**mButton.setEnabled((mEditText.length() > 0));
-
-            if ((mEditText.getText().toString().length() != 16))
-                mWarningTextView.setVisibility(View.VISIBLE);
-            else
-                mWarningTextView.setVisibility(View.INVISIBLE);**/
-
         }
 
         @Override
@@ -112,13 +105,6 @@ public class SecondActivityViewModelImpl extends BaseObservable implements Secon
                 EnabledStatus.set(false);
                 mWarningTextView.setVisibility(View.INVISIBLE);
             }
-
-            /**mButton.setEnabled((mEditText.length() > 0));
-
-            if ((mEditText.getText().toString().length() != 16))
-                mWarningTextView.setVisibility(View.VISIBLE);
-            else
-                mWarningTextView.setVisibility(View.INVISIBLE);**/
         }
     };
 

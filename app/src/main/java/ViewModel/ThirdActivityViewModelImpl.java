@@ -14,7 +14,6 @@ public class ThirdActivityViewModelImpl extends BaseObservable implements ThirdA
 
     private final ThirdActivity mThirdActivity;
     private TextView mTextView;
-    private String                enabledStatus   = "invisible";
 
     public ThirdActivityViewModelImpl(ThirdActivity thirdActivity, TextView textView){
         mThirdActivity = thirdActivity;
