@@ -28,8 +28,6 @@ public class SecondActivity extends AppCompatActivity {
     @Bind(R.id.second_editText)
     EditText mEditText;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

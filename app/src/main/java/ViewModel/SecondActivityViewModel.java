@@ -1,6 +1,7 @@
 package ViewModel;
 
 import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
 import android.view.View;
 
 /**
@@ -14,5 +15,9 @@ public interface SecondActivityViewModel {
     ObservableBoolean getEnabledStatus();
 
     void nextActivity(View view);
+
+    ObservableField<String> getCardType();
+
+    void setCardType(ObservableField<String> card);
 
 }
