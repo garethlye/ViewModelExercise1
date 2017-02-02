@@ -10,4 +10,6 @@ public interface ThirdActivityViewModel {
 
     void onToggleClick(View view);
 
+    void startFourthActivity(View view);
+
 }

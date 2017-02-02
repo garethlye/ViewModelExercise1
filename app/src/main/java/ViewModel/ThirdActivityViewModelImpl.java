@@ -1,9 +1,11 @@
 package ViewModel;
 
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.garethlye.vmexercise5.FourthActivity;
 import com.example.garethlye.vmexercise5.ThirdActivity;
 
 /**
@@ -26,6 +28,16 @@ public class ThirdActivityViewModelImpl extends BaseObservable implements ThirdA
             mTextView.setVisibility(View.INVISIBLE);
         else
             mTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void startFourthActivity(final View view) {
+        startFourthActivity();
+    }
+
+    private void startFourthActivity() {
+        Intent i = new Intent(mThirdActivity, FourthActivity.class);
+        mThirdActivity.startActivity(i);
     }
 
 }

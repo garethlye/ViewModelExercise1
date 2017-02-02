@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.garethlye.vmexercise5.databinding.ActivitySecondBinding;
 
-import ViewModel.SecondActivityViewModel;
 import ViewModel.SecondActivityViewModelImpl;
 import butterknife.Bind;
 import butterknife.ButterKnife;

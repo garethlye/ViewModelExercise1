@@ -10,4 +10,30 @@
     <string name="American_Express">an American Express Card</string>
     <string name="UnknownCard">Unknown Card</string>
     <string name="tooManyNumbers">Sorry! You\'ve Entered too many numbers. The maximum number input is 16.</string>
+    <string name="city_prompt">Choose a city</string>
+    <string name="selectCity">Please select a city from the list below:</string>
+
+    <string-array name="city_arrays">
+        <item>Sydney, AU</item>
+        <item>Kuala Lumpur</item>
+        <item>Petaling Jaya</item>
+        <item>Ipoh</item>
+        <item>Johor</item>
+        <item>Melaka</item>
+        <item>Kuching</item>
+        <item>Kota Kinabalu</item>
+    </string-array>
+
+    <string name="open_weather_maps_app_id">561849bb92b0871e3d22e80747a6a8be</string>
+
+    <string name="weather_sunny">Currently Sunny</string>
+    <string name="weather_clear_night">Currently Clear</string>
+    <string name="weather_foggy">Currently Foggy</string>
+    <string name="weather_cloudy">Currently Foggy</string>
+    <string name="weather_rainy">Currently Rainy</string>
+    <string name="weather_snowy">Currently Snowy</string>
+    <string name="weather_thunder">Currently Thunder Clouds</string>
+    <string name="weather_drizzle">Currently Drizzling</string>
+    <string name="place_not_found">Sorry, no weather data found.</string>
+
 </resources>
