@@ -14,14 +14,22 @@
     <string name="selectCity">Please select a city from the list below:</string>
 
     <string-array name="city_arrays">
-        <item>Sydney, AU</item>
-        <item>Kuala Lumpur</item>
-        <item>Petaling Jaya</item>
+        <item>Sydney</item>
+        <item>KualaLumpur</item>
+        <item>HongKong</item>
+        <item>NewDelhi</item>
+        <item>Moscow</item>
         <item>Ipoh</item>
         <item>Johor</item>
         <item>Melaka</item>
         <item>Kuching</item>
-        <item>Kota Kinabalu</item>
+        <item>KotaKinabalu</item>
+        <item>London</item>
+        <item>Denmark</item>
+        <item>Johannesburg</item>
+        <item>Spain</item>
+        <item>Germany</item>
+        <item>Auckland</item>
     </string-array>
 
     <string name="open_weather_maps_app_id">561849bb92b0871e3d22e80747a6a8be</string>

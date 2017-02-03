@@ -1,5 +1,6 @@
 package com.example.garethlye.vmexercise5;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,6 +12,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 import com.example.garethlye.vmexercise5.databinding.ActivityFourthBinding;
+
 
 public class FourthActivity extends AppCompatActivity {
     @Bind(R.id.city_spinner)
@@ -24,5 +26,7 @@ public class FourthActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         FourthActivityViewModelImpl fourthActivityViewModel = new FourthActivityViewModelImpl(this, citySpinner);
         fourthBinding.setViewModel(fourthActivityViewModel);
+
     }
+
 }
