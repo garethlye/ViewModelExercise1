@@ -21,7 +21,6 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
 
     private final MainActivity mMainActivity;
     private       EditText     mEditText;
-    public       String            BtnText       = "Send";
     public final ObservableBoolean EnabledStatus = new ObservableBoolean(false);
 
 
@@ -65,10 +64,6 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
         mMainActivity.startActivity(i);
     }
 
-    @Bindable
-    public String getBtnText(){
-        return BtnText;
-    }
 
     @Bindable
     public ObservableBoolean getEnabledStatus(){

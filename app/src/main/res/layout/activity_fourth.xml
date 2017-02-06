@@ -70,5 +70,14 @@
         android:text="@{viewModel.desc}"
         android:id="@+id/description"/>
 
+    <Button
+        android:text="@string/nextActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/button"
+        android:onClick="@{viewModel::onNextActivityClicked}"/>
+
 </RelativeLayout>
 </layout>

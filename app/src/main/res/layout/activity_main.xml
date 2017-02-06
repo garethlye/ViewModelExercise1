@@ -31,7 +31,7 @@
             />
 
         <Button
-            android:text="@{viewModel.BtnText}"
+            android:text="@string/nextActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/main_editText1"

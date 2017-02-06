@@ -2,7 +2,7 @@ package com.example.garethlye.vmexercise5;
 
 /**
  * Created by garethlye on 02/02/2017.
- */
+ **/
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import android.util.Log;
 public class fetchWeatherData {
 
     private static final String OPEN_WEATHER_MAP_API =
-            "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&APPID=561849bb92b0871e3d22e80747a6a8be";
+            "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
 
     public static JSONObject getJSON(Context context, String city){
         try {

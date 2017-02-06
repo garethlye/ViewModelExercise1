@@ -11,7 +11,5 @@ public interface MainActivityViewModel {
 
     void onButtonClicked(View view);
 
-    String getBtnText();
-
     ObservableBoolean getEnabledStatus();
 }

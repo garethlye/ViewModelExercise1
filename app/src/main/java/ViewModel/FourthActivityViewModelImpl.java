@@ -1,13 +1,14 @@
 package ViewModel;
 
+import android.content.Intent;
 import android.databinding.ObservableField;
 import android.util.Log;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.example.garethlye.vmexercise5.FifthActivity;
 import com.example.garethlye.vmexercise5.FourthActivity;
 import com.example.garethlye.vmexercise5.R;
 import com.example.garethlye.vmexercise5.fetchWeatherData;
@@ -64,12 +65,13 @@ public class FourthActivityViewModelImpl implements FourthActivityViewModel {
 
         new Thread() {
             public void run() {
-                final JSONObject json = fetchWeatherData.getJSON(mFourthActivity, city);
+                String citySelected = city.replaceAll("\\s","");
+                final JSONObject json = fetchWeatherData.getJSON(mFourthActivity, citySelected);
                 if (json == null) {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            chosenCity.set("failed");
+                            chosenCity.set("Failed to obtain Weather Data... :(");
                             desc.set(mFourthActivity.getString(R.string.place_not_found));
                             time.set(mFourthActivity.getString(R.string.place_not_found));
                             temp.set(mFourthActivity.getString(R.string.place_not_found));
@@ -90,16 +92,6 @@ public class FourthActivityViewModelImpl implements FourthActivityViewModel {
             }
         }.start();
     }
-        /**if (json == null) {
-            chosenCity.set("failed");
-            desc.set(mFourthActivity.getString(R.string.place_not_found));
-            time.set(mFourthActivity.getString(R.string.place_not_found));
-            temp.set(mFourthActivity.getString(R.string.place_not_found));
-        }
-        else{
-            renderWeather(json);
-        }
-    }**/
 
     private void renderWeather(JSONObject json){
         try {
@@ -124,6 +116,16 @@ public class FourthActivityViewModelImpl implements FourthActivityViewModel {
         }catch(Exception e){
             Log.e("Weather Error", "One or more fields not found in the JSON data");
         }
+    }
+
+    @Override
+    public void onNextActivityClicked(final View view){
+        startFifthActivity();
+    }
+
+    private void startFifthActivity(){
+        Intent i = new Intent(mFourthActivity, FifthActivity.class);
+        mFourthActivity.startActivity(i);
     }
 
 
