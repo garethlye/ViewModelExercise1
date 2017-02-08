@@ -26,5 +26,55 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView"/>
+
+    <Button
+        android:text="Increase Speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="93dp"
+        android:id="@+id/increaseBtn"
+        android:onClick="@{viewModel::increaseBtn}"/>
+
+    <Button
+        android:text="Brake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/increaseBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/brakeBtn"
+        android:onClick="@{viewModel::brakeBtn}"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="42dp"
+        android:maxLength="9"
+        android:id="@+id/speedValue"/>
+
+    <Button
+        android:text="Add Fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/brakeBtn"
+        android:id="@+id/addFuel"
+        android:onClick="@{viewModel::addFuel}"/>
+
+    <Button
+        android:text="@string/nextActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/addFuel"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/nextActivity"
+        android:onClick="@{viewModel::startSixthActivity}"/>
 </RelativeLayout>
 </layout>

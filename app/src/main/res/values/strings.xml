@@ -1,6 +1,6 @@
 <resources>
     <string name="nextActivity">Next Activity</string>
-    <string name="Dagger2.0TestingText">Dagger 2.0 Testing - Activity Page</string>
+    <string name="Dagger2.0TestingText">Dagger 2.0 Testing 1# - Activity Page</string>
     <string name="app_name">VMexercise5</string>
     <string name="press_me">Press Me!</string>
     <string name="hint_message">Please enter the 16 digits of your </string>

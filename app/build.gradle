@@ -30,7 +30,7 @@ android {
     }
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xmaxerrs" << "500" // or whatever number you want
+            options.compilerArgs << "-Xmaxerrs" << "500" //number of errors the compiler will generate
         }
     }
 }
@@ -46,7 +46,10 @@ dependencies {
     compile 'com.android.support:support-v4:25.1.1'
     testCompile 'junit:junit:4.12'
 
+
+    //DAGGERRRRR 2.0
     compile 'com.google.dagger:dagger:2.9'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.9'
+    apt "com.google.dagger:dagger-compiler:2.9"
+    provided 'javax.annotation:jsr250-api:1.0'
 
 }

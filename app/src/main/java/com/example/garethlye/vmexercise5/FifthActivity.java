@@ -3,13 +3,33 @@ package com.example.garethlye.vmexercise5;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import DependencyInjectionExample.DaggerVehicleComponent;
+import DependencyInjectionExample.Test;
+import DependencyInjectionExample.VehicleComponent;
+import DependencyInjectionExample.VehicleModule;
+import DependencyInjectionExample.Vehicle;
 import ViewModel.FifthActivityViewModelImpl;
+import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import android.databinding.DataBindingUtil;
+import android.util.Log;
+import android.widget.EditText;
 
 import com.example.garethlye.vmexercise5.databinding.ActivityFifthBinding;
 
+import javax.inject.Inject;
+
 public class FifthActivity extends AppCompatActivity {
+
+    @Bind(R.id.speedValue)
+    EditText speedValue;
+
+    @Inject
+    Vehicle vehicle;
+
+    @Inject
+    Test test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +37,25 @@ public class FifthActivity extends AppCompatActivity {
 
         ActivityFifthBinding fifthBinding = DataBindingUtil.setContentView(this, R.layout.activity_fifth);
         ButterKnife.bind(this);
-        FifthActivityViewModelImpl fifthActivityViewModel = new FifthActivityViewModelImpl(this);
+
+        VehicleComponent vehicleComponent = DaggerVehicleComponent.builder().vehicleModule(new VehicleModule()).build();
+        vehicleComponent.inject(this);
+        FifthActivityViewModelImpl fifthActivityViewModel = new FifthActivityViewModelImpl(this, vehicleComponent, speedValue);
+        //CANT USE THIS vehicle = vehicleComponent.provideVehicle();
+
+
+
+        if(vehicle == null){
+            Log.w("ERROR ON VEHICLE", "NULL!");
+        }
+        else
+            Log.w("ERROR ON VEHICLE", "NOT NULL!");
+
+        if(test == null){
+            Log.w("ERROR ON TEST", "NULL!");
+        }
+        else
+            Log.w("ERROR ON TEST", "NOT NULL!");
         fifthBinding.setViewModel(fifthActivityViewModel);
 
     }
