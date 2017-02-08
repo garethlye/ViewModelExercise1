@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import DependencyInjectionExample.DaggerVehicleComponent;
-import DependencyInjectionExample.Test;
 import DependencyInjectionExample.VehicleComponent;
 import DependencyInjectionExample.VehicleModule;
 import DependencyInjectionExample.Vehicle;
@@ -28,9 +27,6 @@ public class FifthActivity extends AppCompatActivity {
     @Inject
     Vehicle vehicle;
 
-    @Inject
-    Test test;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +37,9 @@ public class FifthActivity extends AppCompatActivity {
         VehicleComponent vehicleComponent = DaggerVehicleComponent.builder().vehicleModule(new VehicleModule()).build();
         vehicleComponent.inject(this);
         FifthActivityViewModelImpl fifthActivityViewModel = new FifthActivityViewModelImpl(this, vehicleComponent, speedValue);
-        //CANT USE THIS vehicle = vehicleComponent.provideVehicle();
+
+
+        //Can also use this vehicle = vehicleComponent.provideVehicle();
 
 
 
@@ -51,11 +49,6 @@ public class FifthActivity extends AppCompatActivity {
         else
             Log.w("ERROR ON VEHICLE", "NOT NULL!");
 
-        if(test == null){
-            Log.w("ERROR ON TEST", "NULL!");
-        }
-        else
-            Log.w("ERROR ON TEST", "NOT NULL!");
         fifthBinding.setViewModel(fifthActivityViewModel);
 
     }

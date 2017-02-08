@@ -7,11 +7,8 @@ import javax.inject.Singleton;
 import DIexample2_modules.AircondModule;
 import DIexample2_modules.EngineModule;
 import DIexample2_modules.GPSModule;
+import ViewModel.SixthActivityViewModelImpl;
 import dagger.Component;
-
-/**
- * Created by garethlye on 07/02/2017.
-* */
 
 @Singleton
 @Component(modules = {
@@ -36,4 +33,5 @@ public interface CarComponent {
 
     void inject(SixthActivity activity);
 
+    void inject(SixthActivityViewModelImpl sixthActivityViewModelImpl);
 }

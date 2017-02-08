@@ -27,9 +27,4 @@ public class VehicleModule {
     return new Vehicle(new Motor(), new Fuel());
     }
 
-    @Provides
-    Test provideTest(){
-        return new Test();
-    }
-
 }

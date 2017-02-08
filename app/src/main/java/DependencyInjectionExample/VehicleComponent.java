@@ -3,11 +3,9 @@ package DependencyInjectionExample;
 import com.example.garethlye.vmexercise5.FifthActivity;
 
 import javax.inject.Singleton;
-import dagger.Component;
 
-/***
- * Created by garethlye on 07/02/2017.
- */
+import ViewModel.SixthActivityViewModelImpl;
+import dagger.Component;
 
 @Singleton
 @Component(modules = {
@@ -21,5 +19,7 @@ public interface VehicleComponent {
     Fuel provideFuel();
 
     void inject(FifthActivity activity);
+
+    void inject(SixthActivityViewModelImpl sixthActivityViewModelImpl);
 
 }
