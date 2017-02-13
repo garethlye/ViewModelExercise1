@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import com.example.garethlye.vmexercise5.MainActivity;
 import com.example.garethlye.vmexercise5.SecondActivity;
+import com.example.garethlye.vmexercise5.SeventhActivity;
 
 /**
  * Created by garethlye on 24/01/2017.
@@ -61,6 +62,12 @@ public class MainActivityViewModelImpl extends BaseObservable implements MainAct
         String text = mEditText.getText().toString();
         Intent i = new Intent(mMainActivity, SecondActivity.class);
         i.putExtra("editTextValue", text);
+        mMainActivity.startActivity(i);
+    }
+
+    @Override
+    public void startSeventhActivity(final View view){
+        Intent i = new Intent(mMainActivity, SeventhActivity.class);
         mMainActivity.startActivity(i);
     }
 

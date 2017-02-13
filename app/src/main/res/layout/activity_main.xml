@@ -42,5 +42,15 @@
             android:enabled="@{viewModel.EnabledStatus}"
             />
 
+        <Button
+            android:text="Seventh Activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_button1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:id="@+id/startSeventhActivity"
+            android:onClick="@{viewModel::startSeventhActivity}"/>
+
     </RelativeLayout>
 </layout>

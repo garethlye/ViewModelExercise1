@@ -12,4 +12,6 @@ public interface MainActivityViewModel {
     void onButtonClicked(View view);
 
     ObservableBoolean getEnabledStatus();
+
+    void startSeventhActivity(View view);
 }

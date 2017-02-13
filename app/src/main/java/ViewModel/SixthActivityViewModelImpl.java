@@ -97,7 +97,7 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
     @Override
     public void onBatteryClicked(final View view) {
-        if ((Battery.get()) == "Battery : ON") {
+        if ((Battery.get()).equals("Battery : ON")) {
             Battery.set("Battery : OFF");
             mBattery_engine.disableBattery();
             checkEngine();
@@ -111,7 +111,7 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
     @Override
     public void onFanClicked(final View view) {
-        if ((Fan.get()) == "Fan : ON") {
+        if ((Fan.get()).equals("Fan : ON")) {
             Fan.set("Fan : OFF");
             mFan_aircond.disableFan();
             checkAircond();
@@ -125,7 +125,7 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
     @Override
     public void onCompressorClicked(final View view) {
-        if ((Compressor.get()) == "Compressor : ON") {
+        if ((Compressor.get()).equals("Compressor : ON")) {
             Compressor.set("Compressor : OFF");
             mCompressor_aircond.disableCompressor();
             checkAircond();
@@ -139,7 +139,7 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
     @Override
     public void onSpeakerClicked(final View view) {
-        if ((Speaker.get()) == "Speaker : ON") {
+        if ((Speaker.get()).equals("Speaker : ON")) {
             Speaker.set("Speaker : OFF");
             mSpeaker_gps.disableSpeaker();
             checkGPS();
@@ -153,7 +153,7 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
     @Override
     public void onSensorClicked(final View view) {
-        if ((Sensor.get()) == "Sensor : ON") {
+        if ((Sensor.get()).equals("Sensor : ON")) {
             Sensor.set("Sensor : OFF");
             mSensor_gps.disableSensor();
             checkGPS();
@@ -167,21 +167,21 @@ public class SixthActivityViewModelImpl implements SixthActivityViewModel {
 
 
     private void checkEngine() {
-        if (Diesel.get() == "Diesel : ON" && Battery.get() == "Battery : ON")
+        if (Diesel.get().equals("Diesel : ON") && Battery.get().equals("Battery : ON"))
             engineStatus.set("Engine ON");
         else
             engineStatus.set("Engine OFF");
     }
 
     private void checkAircond() {
-        if (Fan.get() == "Fan : ON" && Compressor.get() == "Compressor : ON")
+        if (Fan.get().equals("Fan : ON") && Compressor.get().equals("Compressor : ON"))
             aircondStatus.set("Aircond ON");
         else
             aircondStatus.set("Aircond OFF");
     }
 
     private void checkGPS() {
-        if (Speaker.get() == "Speaker : ON" && Sensor.get() == "Sensor : ON")
+        if (Speaker.get().equals("Speaker : ON") && Sensor.get().equals("Sensor : ON"))
             gpsStatus.set("GPS ON");
         else
             gpsStatus.set("GPS OFF");
