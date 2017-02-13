@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import android.os.Handler;
@@ -23,15 +22,12 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Action2;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-import static android.R.attr.filter;
-
 /**
  * Created by garethlye on 08/02/2017.
- */
+ **/
 
 public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
 
@@ -65,7 +61,7 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         @Override
         public void onItemSelected(final AdapterView<?> adapterView, final View view, final int i, final long l) {
             selectedCity.set(mCitySpinner.getSelectedItem().toString());
-            fetchWeatherData2();
+            fetchWeatherData2(mCitySpinner.getSelectedItem().toString());
         }
 
         @Override
@@ -74,14 +70,14 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         }
     };
 
-    private void fetchWeatherData2() {
+    private void fetchWeatherData2(final String city) {
         Observable.just("")
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<String, JSONObject>() {
 
                     @Override
                     public JSONObject call(final String s) {
-                        return fetchWeatherData.getJSON(mSeventhActivity, selectedCity.get().toString());
+                        return fetchWeatherData.getJSON(mSeventhActivity, city);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -89,7 +85,6 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
                     @Override
                     public void call(final JSONObject jsonObject) {
                         new Thread() {
-                            //JSONObject jsonObject = fetchWeatherData.getJSON(mSeventhActivity, selectedCity.toString());
                             public void run() {
 
                                 if (jsonObject == null) {
@@ -115,74 +110,6 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
                         }.start();
                     }
                 });
-
-        /**Action1<JSONObject> onNextAction = new Action1<JSONObject>() {
-            @Override public void call(final JSONObject jsonObject) {
-                new Thread() {
-                    //JSONObject jsonObject = fetchWeatherData.getJSON(mSeventhActivity, selectedCity.toString());
-                    public void run() {
-
-                        if (jsonObject == null) {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    chosenCity.set("Failed to obtain Weather Data... :(");
-                                    desc.set(mSeventhActivity.getString(R.string.place_not_found));
-                                    time.set(mSeventhActivity.getString(R.string.place_not_found));
-                                    temp.set(mSeventhActivity.getString(R.string.place_not_found));
-                                }
-                            });
-                        }
-                        else {
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    renderWeather(jsonObject);
-                                }
-                            });
-                        }
-                    }
-                }.start();
-            }
-        };
-        myObservable.subscribe(onNextAction);**/
-
-
-        /**Observable.just(fetchWeatherData.getJSON(mSeventhActivity, selectedCity.toString())).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()
-                ).subscribe(new Action1<JSONObject>() {
-                    @Override
-                    public void call(final JSONObject jsonObject) {
-                        setup2(jsonObject);
-                    }});**/
-    }
-
-    private void setup2(final JSONObject jsonObject) {
-        new Thread() {
-            public void run() {
-                if (jsonObject == null) {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            chosenCity.set("Failed to obtain Weather Data... :(");
-                            desc.set(mSeventhActivity.getString(R.string.place_not_found));
-                            time.set(mSeventhActivity.getString(R.string.place_not_found));
-                            temp.set(mSeventhActivity.getString(R.string.place_not_found));
-                            //Toast.makeText(mFourthActivity,
-                            //mFourthActivity.getString(R.string.place_not_found),
-                            //Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            renderWeather(jsonObject);
-                        }
-                    });
-                }
-            }
-        }.start();
     }
 
     private void renderWeather(JSONObject json) {
@@ -250,7 +177,7 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
 
     private void rxJava_secondStyle() {
 
-        /**Observable<String> myObservable =
+        Observable<String> myObservable =
          Observable.just("Hello, world!");   //outputs just one line of code
 
 
@@ -262,7 +189,7 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         };
 
          myObservable.subscribe(onNextAction); // you can add ,onErrorAction, onCompleteAction too
-         **/
+
         ///but an even shorter wayyy is to combine both methods together!
 
         Observable.just("Hello, world!")
