@@ -15,7 +15,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
-public class fetchWeatherData {
+public class fetchWeatherData{
 
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
@@ -39,7 +39,7 @@ public class fetchWeatherData {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),8024);
             Log.e("Reader", "Reader Passed");
 
-            String tmp="";
+            String tmp;
             while((tmp=reader.readLine())!=null)
                 json.append(tmp).append("\n");
             reader.close();
@@ -47,12 +47,12 @@ public class fetchWeatherData {
             JSONObject data = new JSONObject(json.toString());
 
             if(data.getInt("cod") != 200){
-                Log.e("", "");
+                Log.e("cod", "cod value does not equal to 200!");
                 return null;
             }
 
             if(data.getInt("cod")== 404){
-                Log.e("Request","Request failed");
+                Log.e("Request","Request failed!");
             }
 
             return data;

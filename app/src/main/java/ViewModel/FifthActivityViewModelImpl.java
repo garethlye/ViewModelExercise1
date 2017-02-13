@@ -45,6 +45,9 @@ public class FifthActivityViewModelImpl implements FifthActivityViewModel{
 
 
     public void increaseBtn(final View view){
+        if(mSpeedValue.getText() == null){
+            Toast.makeText(mFifthActivity, String.valueOf("You need to input a digit!"), Toast.LENGTH_SHORT).show();
+        }
         if(Integer.parseInt(mSpeedValue.getText().toString()) > 21474836){
             Toast.makeText(mFifthActivity, String.valueOf("You've entered too long a digit"), Toast.LENGTH_SHORT).show();
         }
