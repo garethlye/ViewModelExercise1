@@ -1,11 +1,9 @@
 package ViewModel;
 
 import android.content.Context;
-import android.databinding.ObservableField;
 import android.util.Log;
 
 import com.example.garethlye.vmexercise5.R;
-
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -15,7 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -82,7 +79,7 @@ public class FetchDataViewModel {
                 }).doOnError(new Action1<Throwable>() {
                     @Override
                     public void call(final Throwable throwable) {
-
+                        Log.e("Error on API Call!", "Error thrown from API class");
                     }
                 });
     }

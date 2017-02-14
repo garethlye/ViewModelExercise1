@@ -32,7 +32,6 @@ import rx.schedulers.Schedulers;
 public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
 
 
-
     private String textValue  = "Results Start Below";
     private String textValue2 = "Results Start Below";
     private SeventhActivity mSeventhActivity;
@@ -43,22 +42,19 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
     private ObservableField<String> temp         = new ObservableField<>();
     private ObservableField<String> time         = new ObservableField<>();
     private ObservableField<String> desc         = new ObservableField<>();
-    private Handler mHandler;
     private FetchDataViewModel mFetchDataViewModel;
 
 
     public SeventhActivityViewModelImpl(SeventhActivity seventhActivity, Spinner citySpinner, FetchDataViewModel fetchDataViewModel) {
         mSeventhActivity = seventhActivity;
-        mHandler = new Handler();
         mCitySpinner = citySpinner;
         mFetchDataViewModel = fetchDataViewModel;
 
-        //rxJava_firstStyle();
-        //rxJava_secondStyle();
+        //rxJava_firstStyle(); //older method, don't use
+        //rxJava_secondStyle(); //older method, don't use
         setup1();
     }
-
-
+    
     private void setup1() {
         mCitySpinner.setOnItemSelectedListener(SpinnerListener);
     }
@@ -68,7 +64,6 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         public void onItemSelected(final AdapterView<?> adapterView, final View view, final int i, final long l) {
             selectedCity.set(mCitySpinner.getSelectedItem().toString());
             setWeatherData(mCitySpinner.getSelectedItem().toString());
-            //fetchWeatherData2(mCitySpinner.getSelectedItem().toString());
         }
 
         @Override
@@ -77,88 +72,31 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         }
     };
 
-    private void setWeatherData(final String city){
+    private void setWeatherData(final String city) {
         mFetchDataViewModel.getWeatherInfo(mSeventhActivity, city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Action0() {
                     @Override
                     public void call() {
-                        Log.e("weather call", "weather call worked!");
+                        Log.e("Weather call", "Weather call worked!");
                     }
                 })
                 .subscribe(new Action1<JSONObject>() {
                     @Override
                     public void call(final JSONObject jsonObject) {
-                        new Thread() {
-                            public void run() {
-
-                                if (jsonObject == null) {
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            chosenCity.set("Failed to obtain Weather Data... :(");
-                                            desc.set(mSeventhActivity.getString(R.string.place_not_found));
-                                            time.set(mSeventhActivity.getString(R.string.place_not_found));
-                                            temp.set(mSeventhActivity.getString(R.string.place_not_found));
-                                        }
-                                    });
-                                }
-                                else {
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            renderWeather(jsonObject);
-                                        }
-                                    });
-                                }
-                            }
-                        }.start();
+                        if (jsonObject == null) {
+                            chosenCity.set("Failed to obtain Weather Data... :(");
+                            desc.set(mSeventhActivity.getString(R.string.place_not_found));
+                            time.set(mSeventhActivity.getString(R.string.place_not_found));
+                            temp.set(mSeventhActivity.getString(R.string.place_not_found));
+                        }
+                        else {
+                            renderWeather(jsonObject);
+                        }
                     }
                 });
     }
-
-    /**private void fetchWeatherData2(final String city) {
-        Observable.just("")
-                .subscribeOn(Schedulers.io())
-                .map(new Func1<String, JSONObject>() {
-
-                    @Override
-                    public JSONObject call(final String s) {
-                        return fetchWeatherData.getJSON(mSeventhActivity, city);
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<JSONObject>() {
-                    @Override
-                    public void call(final JSONObject jsonObject) {
-                        new Thread() {
-                            public void run() {
-
-                                if (jsonObject == null) {
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            chosenCity.set("Failed to obtain Weather Data... :(");
-                                            desc.set(mSeventhActivity.getString(R.string.place_not_found));
-                                            time.set(mSeventhActivity.getString(R.string.place_not_found));
-                                            temp.set(mSeventhActivity.getString(R.string.place_not_found));
-                                        }
-                                    });
-                                }
-                                else {
-                                    mHandler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            renderWeather(jsonObject);
-                                        }
-                                    });
-                                }
-                            }
-                        }.start();
-                    }
-                });
-    }**/
 
     private void renderWeather(JSONObject json) {
         try {
@@ -184,6 +122,59 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
             Log.e("Weather Error", "One or more fields not found in the JSON data");
         }
     }
+
+    private void setText(String text) {
+        textValue = textValue + "\n" + text;
+    }
+
+    private void setText2(String text) {
+        textValue2 = textValue2 + "\n" + text;
+    }
+
+    @Override
+    public String getTextValue() {
+        return textValue;
+    }
+
+    @Override
+    public String getTextValue2() {
+        return textValue2;
+    }
+
+
+    @Override
+    public ObservableField<String> getTemp() {
+        return temp;
+    }
+
+    @Override
+    public ObservableField<String> getTime() {
+        return time;
+    }
+
+    @Override
+    public ObservableField<String> getDesc() {
+        return desc;
+    }
+
+    @Override
+    public ObservableField<String> getSelectedCity() {
+        return selectedCity;
+    }
+
+    @Override
+    public ObservableField<String> getChosenCity() {
+        return chosenCity;
+    }
+
+
+
+
+
+
+
+
+    ////////////////////CODES BELOW ARE NOTES, NOTHING MORE//////////////////////////
 
 
     ////////////////This is the most verbose way to write down observable and subscriber....
@@ -254,48 +245,6 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
     }
 
     /////////////////////////////////
-    private void setText(String text) {
-        textValue = textValue + "\n" + text;
-    }
 
-    private void setText2(String text) {
-        textValue2 = textValue2 + "\n" + text;
-    }
-
-    @Override
-    public String getTextValue() {
-        return textValue;
-    }
-
-    @Override
-    public String getTextValue2() {
-        return textValue2;
-    }
-
-
-    @Override
-    public ObservableField<String> getTemp() {
-        return temp;
-    }
-
-    @Override
-    public ObservableField<String> getTime() {
-        return time;
-    }
-
-    @Override
-    public ObservableField<String> getDesc() {
-        return desc;
-    }
-
-    @Override
-    public ObservableField<String> getSelectedCity() {
-        return selectedCity;
-    }
-
-    @Override
-    public ObservableField<String> getChosenCity() {
-        return chosenCity;
-    }
 
 }

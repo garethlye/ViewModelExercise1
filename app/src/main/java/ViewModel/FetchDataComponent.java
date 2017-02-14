@@ -17,7 +17,7 @@ import dagger.Component;
 })
 public interface FetchDataComponent {
 
-    FetchDataViewModel provideFetchDataViewModel();
+    //FetchDataViewModel provideFetchDataViewModel();
 
     void inject(SeventhActivity activity);
 }
