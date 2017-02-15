@@ -15,17 +15,17 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
-public class fetchWeatherData{
+public class fetchWeatherData {
 
     private static final String OPEN_WEATHER_MAP_API =
             "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
 
-    public static JSONObject getJSON(Context context, String city){
+    public static JSONObject getJSON(Context context, String city) {
         try {
             URL url = new URL(String.format(OPEN_WEATHER_MAP_API, city));
             Log.e("URl", "Url string format passed");
             HttpURLConnection connection =
-                    (HttpURLConnection)url.openConnection();
+                    (HttpURLConnection) url.openConnection();
             Log.e("HTTP", "http connection open passed");
 
             connection.addRequestProperty("x-api-key",
@@ -36,27 +36,27 @@ public class fetchWeatherData{
             Log.e("String Buffer", "String buffer passed");
 
             InputStream inputStream = connection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),8024);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8024);
             Log.e("Reader", "Reader Passed");
 
             String tmp;
-            while((tmp=reader.readLine())!=null)
+            while ((tmp = reader.readLine()) != null)
                 json.append(tmp).append("\n");
             reader.close();
 
             JSONObject data = new JSONObject(json.toString());
 
-            if(data.getInt("cod") != 200){
+            if (data.getInt("cod") != 200) {
                 Log.e("cod", "cod value does not equal to 200!");
                 return null;
             }
 
-            if(data.getInt("cod")== 404){
-                Log.e("Request","Request failed!");
+            if (data.getInt("cod") == 404) {
+                Log.e("Request", "Request failed!");
             }
 
             return data;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

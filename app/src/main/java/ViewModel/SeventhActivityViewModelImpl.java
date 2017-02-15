@@ -54,7 +54,8 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
         //rxJava_secondStyle(); //older method, don't use
         setup1();
     }
-    
+
+
     private void setup1() {
         mCitySpinner.setOnItemSelectedListener(SpinnerListener);
     }
@@ -73,7 +74,7 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
     };
 
     private void setWeatherData(final String city) {
-        mFetchDataViewModel.getWeatherInfo(mSeventhActivity, city)
+        mFetchDataViewModel.fromJSON(mSeventhActivity, city)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Action0() {
@@ -82,46 +83,22 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
                         Log.e("Weather call", "Weather call worked!");
                     }
                 })
-                .subscribe(new Action1<JSONObject>() {
+                .doOnError(new Action1<Throwable>() {
                     @Override
-                    public void call(final JSONObject jsonObject) {
-                        if (jsonObject == null) {
-                            chosenCity.set("Failed to obtain Weather Data... :(");
-                            desc.set(mSeventhActivity.getString(R.string.place_not_found));
-                            time.set(mSeventhActivity.getString(R.string.place_not_found));
-                            temp.set(mSeventhActivity.getString(R.string.place_not_found));
-                        }
-                        else {
-                            renderWeather(jsonObject);
-                        }
+                    public void call(final Throwable throwable) {
+                        Log.e("Weather Data Error", "Failed to obtain/display weather data");
                     }
-                });
-    }
-
-    private void renderWeather(JSONObject json) {
-        try {
-            chosenCity.set(json.getString("name").toUpperCase(Locale.US) +
-                    ", " +
-                    json.getJSONObject("sys").getString("country"));
-
-            JSONObject details = json.getJSONArray("weather").getJSONObject(0);
-            JSONObject main = json.getJSONObject("main");
-            desc.set(
-                    details.getString("description").toUpperCase(Locale.US) +
-                            "\n" + "Humidity: " + main.getString("humidity") + "%" +
-                            "\n" + "Pressure: " + main.getString("pressure") + " hPa");
-
-            temp.set(
-                    String.format("%.2f", main.getDouble("temp")) + " ℃");
-
-            DateFormat df = DateFormat.getDateTimeInstance();
-            String updatedOn = df.format(new Date(json.getLong("dt") * 1000));
-            time.set("Last update: " + updatedOn);
-
-        } catch (Exception e) {
-            Log.e("Weather Error", "One or more fields not found in the JSON data");
-        }
-    }
+                })
+                .subscribe(new Action1<FetchDataViewModel>() {
+                    @Override
+                    public void call(final FetchDataViewModel weatherData) {
+                        chosenCity.set(weatherData.getCityWeather());
+                        temp.set(weatherData.getWeatherTemp());
+                        time.set(weatherData.getCityTime());
+                        desc.set(weatherData.getWeatherDesc());
+                        }
+                    });
+                }
 
     private void setText(String text) {
         textValue = textValue + "\n" + text;
@@ -166,12 +143,6 @@ public class SeventhActivityViewModelImpl implements SeventhActivityViewModel {
     public ObservableField<String> getChosenCity() {
         return chosenCity;
     }
-
-
-
-
-
-
 
 
     ////////////////////CODES BELOW ARE NOTES, NOTHING MORE//////////////////////////

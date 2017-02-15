@@ -2,6 +2,7 @@ package ViewModel;
 
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,10 +46,10 @@ public class FifthActivityViewModelImpl implements FifthActivityViewModel{
 
 
     public void increaseBtn(final View view){
-        if(mSpeedValue.getText() == null){
+        if(TextUtils.isEmpty(mSpeedValue.getText().toString())){
             Toast.makeText(mFifthActivity, String.valueOf("You need to input a digit!"), Toast.LENGTH_SHORT).show();
         }
-        if(Integer.parseInt(mSpeedValue.getText().toString()) > 21474836){
+        else if(Integer.parseInt(mSpeedValue.getText().toString()) > 21474836){
             Toast.makeText(mFifthActivity, String.valueOf("You've entered too long a digit"), Toast.LENGTH_SHORT).show();
         }
         else if(fuel.getRemainingFuel()<1){

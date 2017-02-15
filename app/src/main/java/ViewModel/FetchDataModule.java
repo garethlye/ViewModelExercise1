@@ -1,9 +1,5 @@
 package ViewModel;
 
-import android.content.Context;
-
-import com.example.garethlye.vmexercise5.SeventhActivity;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
